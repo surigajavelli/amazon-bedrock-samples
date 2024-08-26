@@ -245,19 +245,7 @@ Resources:
   
   # AutoScaling
   #adding StreamlitAutoScalingRole
-  """StreamlitAutoScalingRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Join ['-', ['StreamlitAutoScalingRole', !Ref EnvironmentName]]
-      AssumeRolePolicyDocument:
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: ecs-tasks.amazonaws.com
-            Action: 'sts:AssumeRole'
-      ManagedPolicyArns:
-        - 'arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceAutoscaleRole'
-  """
+  # deleted StreamlitAutoScalingRole
   StreamlitAutoScalingTarget:
     Type: AWS::ApplicationAutoScaling::ScalableTarget
     Properties:
