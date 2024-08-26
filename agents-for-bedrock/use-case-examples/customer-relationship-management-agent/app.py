@@ -103,5 +103,5 @@ if prompt := st.chat_input("Ask the bot about customer..."):
         )
 
         col1.markdown(response_text, unsafe_allow_html=True)
-        # if col3.checkbox('Trace', key=len(st.session_state["chat_history"]), label_visibility="hidden"):
-        # col2.markdown(trace_text)
+        if col3.checkbox('Trace', key=len(st.session_state["chat_history"]), label_visibility="hidden"):
+            col2.markdown(trace_text)
