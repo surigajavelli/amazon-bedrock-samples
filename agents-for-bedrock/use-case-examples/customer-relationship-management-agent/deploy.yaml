@@ -245,9 +245,10 @@ Resources:
   
   # AutoScaling
   #adding StreamlitAutoScalingRole
-  StreamlitAutoScalingRole:
+  """StreamlitAutoScalingRole:
     Type: AWS::IAM::Role
     Properties:
+      RoleName: !Join ['-', ['StreamlitAutoScalingRole', !Ref EnvironmentName]]
       AssumeRolePolicyDocument:
         Statement:
           - Effect: Allow
@@ -256,6 +257,7 @@ Resources:
             Action: 'sts:AssumeRole'
       ManagedPolicyArns:
         - 'arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceAutoscaleRole'
+  """
   StreamlitAutoScalingTarget:
     Type: AWS::ApplicationAutoScaling::ScalableTarget
     Properties:
@@ -264,8 +266,8 @@ Resources:
       ResourceId: !Join ['/', [service, !Ref StreamlitCluster, !GetAtt StreamlitECSService.Name]]
       ScalableDimension: ecs:service:DesiredCount
       ServiceNamespace: ecs
-      #RoleARN: !Sub arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService
-      RoleARN: !GetAtt StreamlitAutoScalingRole.Arn
+      RoleARN: !Sub arn:aws:iam::${AWS::AccountId}:role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService
+      #RoleARN: !GetAtt StreamlitAutoScalingRole.Arn
   
   StreamlitAutoScalingPolicy:
     Type: AWS::ApplicationAutoScaling::ScalingPolicy
